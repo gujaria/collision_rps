@@ -1,0 +1,3 @@
+{
+    "code-runner.customCommand": "java -jar processing-py.jar processing_test.py"
+}
