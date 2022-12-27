@@ -1,3 +1,5 @@
-Have two points in random position which are moving in random direction.
-Have simple collision algorithm.
+Have two points in random position which are moving in random direction. Done
+Have simple collision algorithm. Done
+Have 3 types of things and then have a priority order between these 3 things.. RPS thing.Done
+Need to have a better movement function for points.(maybe go towards the centroid of the given points.)
 Then do quad list.

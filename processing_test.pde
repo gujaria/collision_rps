@@ -19,19 +19,30 @@ class Point():
     
     def move(self, mouse_movement = None):
         if mouse_movement is None:    
-            self.x = (self.x + random.randint(-2, 2)) % 1200
-            self.y = (self.y + random.randint(-2, 2)) % 800
+            self.x = (self.x + random.randint(-2, 2)) % 600
+            self.y = (self.y + random.randint(-2, 2)) % 400
 
         else:
             self.x = mouseX
             self.y = mouseY
-    
+    ## Rock = red
+    ## Paper = white
+    ## Scissor = green 
+    def compare(self,color1,color2):
+        if (color1 + color2) == "redgreen" or (color1 + color2) == "greenred":
+            return "red"
+        if (color1 + color2) == "redwhite" or (color1 + color2) == "whitered":
+            return "white"
+        if (color1 + color2) == "greenwhite" or (color1 + color2) == "whitegreen":
+            return "green" 
+
     def draw(self):
-        
         if self.type == "red":
             fill(255,0,0)
-        else:
+        elif self.type == "white":
             fill(255,255,255)
+        elif self.type == "green":
+            fill(0,255,0)
 
         ellipse(self.x , self.y , 10, 10)  # some out of bounds bug.
         # if the node has gone once out of bounds, it doesnt show up on intersection... for some reason..
@@ -48,32 +59,35 @@ class Point():
         if(distance_between_the_points > 2*5): # (distance_between_the_points > 2*r) : r is 5 see above ellipse
             return False
         else:
-            if (self.type == "red" and point.type == "red"):
+            if (self.type == point.type ):
                 return
-            if (self.type != "red" and point.type != "red"):
-                return
-            if (self.type != "red"):
-                self.type = "red"
-            if (point.type != "red"):
-                point.type = "red"
+            else:
+                color = self.compare(self.type,point.type)
+                self.type = color
+                point.type = color
             return True
 
     
 points = []    
-no_of_points = 500
-for i in range(no_of_points):
-    if i < no_of_points/2:
-        points.append(Point( random.randint(0, 1200),random.randint(0, 800)))   
-    else:
-        points.append(Point( random.randint(0, 1200),random.randint(0, 800),"red"))
+no_of_points = 600
+per_section_no_of_points = no_of_points/3
+
+for i in range(per_section_no_of_points):
+    points.append(Point( random.randint(0, 600),random.randint(0, 400),"red"))
+for i in range(per_section_no_of_points):
+    points.append(Point( random.randint(0, 600),random.randint(0, 400),"green"))
+for i in range(per_section_no_of_points):
+    points.append(Point( random.randint(0, 600),random.randint(0, 400),"white"))
+
+
 
 def setup():
-    size(1200, 800)
+    size(600, 400)
 
 def draw():
 
     fill(255,255,255)
-    background(0)
+    background(255,255,255)
     global points
     no_of_points = len(points)
     
@@ -86,7 +100,7 @@ def draw():
     points[-1].move(mouse_movement=1)
     
     #for i in range(no_of_points):
-    #    if (points[i].x > 1200 or points[i].y > 800 or points[i].y < 0 or points[i].x < 0 ):
+    #    if (points[i].x > 600 or points[i].y > 400 or points[i].y < 0 or points[i].x < 0 ):
     #        print("here")
     #        print(points[i].x)
     #        print(points[i].y)
