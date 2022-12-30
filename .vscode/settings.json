@@ -1,3 +1,3 @@
 {
-    "code-runner.customCommand": "java -jar processing-py.jar processing_test.pde"
+    "code-runner.customCommand": "java -jar processing-py.jar qt_test.py"
 }
